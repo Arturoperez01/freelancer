@@ -59,6 +59,8 @@ import Database_Newtest_db from "./Database_Newtest_db.js";
 
 // Controllers
 import UserController from "../controllers/Newtest_db/UserController";
+import EventoController from "../controllers/Newtest_db/EventoController";
+import ServicioController from "../controllers/Newtest_db/ServicioController";
 
 // End Import Controllers
 
@@ -132,6 +134,8 @@ class Server {
 
     // Start Init Controllers
 		UserController.init(router);
+		EventoController.init(router);
+		ServicioController.init(router);
 		 // End Init Controllers
 
     this.app.use("/", router);

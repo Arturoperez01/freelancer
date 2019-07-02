@@ -85,6 +85,10 @@ const generatedModel = {
         required : true
       },
       //RELATIONS
+      user_servicio: [{
+        type: Schema.ObjectId,
+        ref : "servicio"
+      }],
       
       
       //EXTERNAL RELATIONS

@@ -88,6 +88,10 @@ import { User } from '../../domain/newtest_db/user';
 		},
 		//RELATIONS
 		//EXTERNAL RELATIONS
+		user_servicio: [{
+			type: Schema.ObjectId,
+			ref : "User"
+		}],
 	}
  *
  */

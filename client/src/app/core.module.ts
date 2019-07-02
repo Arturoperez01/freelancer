@@ -33,6 +33,8 @@ import { NgModule } from '@angular/core';
 /* START MY SERVICES IMPORTS*/
 // Do not edit this comment content, it will be overwritten in next Skaffolder generation
 import { UserService } from './services/user.service';
+import { EventoService } from './services/evento.service';
+import { ServicioService } from './services/servicio.service';
 
 /* END MY SERVICES IMPORTS*/
 import { AuthGuard } from './security/auth.guard';
@@ -47,6 +49,8 @@ import { AuthInterceptor } from './security/auth.interceptor';
     /* START PROVIDERS */
 // Do not edit this comment content, it will be overwritten in next Skaffolder generation
     UserService,
+    EventoService,
+    ServicioService,
  /* END PROVIDERS */
 
     // SECURITY
