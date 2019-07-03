@@ -38,6 +38,10 @@ import { Servicio } from '../../domain/newtest_db/servicio';
 
 // START - USED SERVICES
 /**
+* servicioService.create
+*	@description CRUD ACTION create
+*	@param servicio obj Object to insert
+*
 * servicioService.delete
 *	@description CRUD ACTION delete
 *	@param ObjectId id Id servicio

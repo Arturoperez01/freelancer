@@ -38,6 +38,10 @@ import { Evento } from '../../domain/newtest_db/evento';
 
 // START - USED SERVICES
 /**
+* eventoService.create
+*	@description CRUD ACTION create
+*	@param evento obj Object to insert
+*
 * eventoService.delete
 *	@description CRUD ACTION delete
 *	@param ObjectId id Id evento
