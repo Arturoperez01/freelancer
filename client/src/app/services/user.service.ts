@@ -42,6 +42,10 @@ import { UserBaseService } from './base/user.base.service';
 /**
  * Custom APIs
  *
+ * Service.asistencias
+ *	@description regresa una lista de eventos relacionados con el usuario
+ *	@param Number id
+ *
  * Service.changePassword
  *	@description Change password of user from admin
  *	@returns object

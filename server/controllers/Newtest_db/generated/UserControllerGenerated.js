@@ -58,6 +58,7 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/user`;
+    router.get(baseUrl + "/:id/asistencias", authorize([]), UserController.asistencias);
     router.post(baseUrl + "/:id/changePassword", authorize(["ADMIN"]), UserController.changePassword);
     router.post(baseUrl + "", authorize([]), UserController.create);
     router.delete(baseUrl + "/:id", authorize([]), UserController.delete);
@@ -69,7 +70,7 @@ const generatedControllers = {
 
   // CRUD METHODS
 
-  
+    
   /**
   * UserModel.create
   *   @description CRUD ACTION create
@@ -151,6 +152,21 @@ const generatedControllers = {
   
   
   // Custom APIs
+
+  /**
+  * UserModel.asistencias
+  *   @description regresa una lista de eventos relacionados con el usuario
+  *   @param Number id
+  *
+  */
+  asistencias: async (req, res) => {
+    try {
+      res.json({});
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
 
   /**
   * UserModel.changePassword

@@ -59,7 +59,10 @@ import Database_Newtest_db from "./Database_Newtest_db.js";
 
 // Controllers
 import UserController from "../controllers/Newtest_db/UserController";
+import AsistenciaController from "../controllers/Newtest_db/AsistenciaController";
+import Detalle_eventoController from "../controllers/Newtest_db/Detalle_eventoController";
 import EventoController from "../controllers/Newtest_db/EventoController";
+import RolesController from "../controllers/Newtest_db/RolesController";
 import ServicioController from "../controllers/Newtest_db/ServicioController";
 
 // End Import Controllers
@@ -134,7 +137,10 @@ class Server {
 
     // Start Init Controllers
 		UserController.init(router);
+		AsistenciaController.init(router);
+		Detalle_eventoController.init(router);
 		EventoController.init(router);
+		RolesController.init(router);
 		ServicioController.init(router);
 		 // End Init Controllers
 

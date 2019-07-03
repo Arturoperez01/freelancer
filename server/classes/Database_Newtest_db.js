@@ -39,7 +39,10 @@ import properties from "../properties.js";
 // Start Import Models
 
 import UserModel from "../models/Newtest_db/UserModel";
+import AsistenciaModel from "../models/Newtest_db/AsistenciaModel";
+import Detalle_eventoModel from "../models/Newtest_db/Detalle_eventoModel";
 import EventoModel from "../models/Newtest_db/EventoModel";
+import RolesModel from "../models/Newtest_db/RolesModel";
 import ServicioModel from "../models/Newtest_db/ServicioModel";
 
 // End Import Models
@@ -57,7 +60,10 @@ class Database {
     // Start Init Models
 
 		UserModel.init();
+		AsistenciaModel.init();
+		Detalle_eventoModel.init();
 		EventoModel.init();
+		RolesModel.init();
 		ServicioModel.init();
  // End Init Models
   }
