@@ -114,6 +114,16 @@ const generatedModel = {
   // CRUD METHODS
 
   
+  /**
+  * asistenciaModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id asistencia
+  *
+  */
+  async delete(id) {
+    return await generatedModel.model.findByIdAndRemove(id);
+  },
+  
 
 
 };

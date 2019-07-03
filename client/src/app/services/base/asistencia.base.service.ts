@@ -98,6 +98,18 @@ export class AsistenciaBaseService {
 
     // CRUD METHODS
 
+    /**
+    * asistenciaService.delete
+    *   @description CRUD ACTION delete
+    *   @param ObjectId id Id asistencia
+    *
+    */
+    remove(id: string): Observable<void> {
+        return this.http
+            .delete<void>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
 
     // Custom APIs
 

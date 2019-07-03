@@ -108,6 +108,59 @@ const generatedModel = {
   // CRUD METHODS
 
 
+  /**
+  * servicioModel.create
+  *   @description CRUD ACTION create
+  *   @param servicio obj Object to insert
+  *
+  */
+  async create(item) {
+    const obj = new generatedModel.model(item);
+    return await obj.save();
+  },
+  
+  /**
+  * servicioModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id servicio
+  *
+  */
+  async delete(id) {
+    return await generatedModel.model.findByIdAndRemove(id);
+  },
+  
+  /**
+  * servicioModel.get
+  *   @description CRUD ACTION get
+  *   @param ObjectId id Id servicio
+  *   @returns servicio
+  *
+  */
+  async get(id) {
+    return await generatedModel.model.findOne({_id: id});
+  },
+  
+  /**
+  * servicioModel.list
+  *   @description CRUD ACTION list
+  *   @returns ARRAY OF servicio
+  *
+  */
+  async list() {
+    return await generatedModel.model.find();
+  },
+  
+  /**
+  * servicioModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id servicio
+  *   @returns servicio
+  *
+  */
+  async update(item) { 
+    return await generatedModel.model.findOneAndUpdate({ _id: item._id }, item, {'new': true});
+  },
+  
 
 
 };

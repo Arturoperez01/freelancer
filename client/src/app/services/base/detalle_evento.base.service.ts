@@ -98,6 +98,19 @@ export class Detalle_eventoBaseService {
 
     // CRUD METHODS
 
+    /**
+    * detalle_eventoService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id detalle_evento
+    *   @returns detalle_evento
+    *
+    */
+    update(item: Detalle_evento): Observable<Detalle_evento> {
+        return this.http
+            .post<Detalle_evento>(this.contextUrl + '/' + item._id, item)
+            .pipe(map(data => data));
+    }
+
 
     // Custom APIs
 
@@ -125,7 +138,7 @@ export class Detalle_eventoBaseService {
     */
     list(...params: any[]): Observable<any> {
         return this.http
-            .get<any>(this.contextUrl + '/list/{id_evento}', {})
+            .get<any>(this.contextUrl + '/{id_evento}/list', {})
             .pipe(
                 map(response => response)
             );

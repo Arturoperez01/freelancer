@@ -59,11 +59,28 @@ const generatedControllers = {
   init: router => {
     const baseUrl = `${Properties.api}/asistencia`;
     router.post(baseUrl + "/add", authorize([]), AsistenciaController.add);
+    router.delete(baseUrl + "/:id", authorize([]), AsistenciaController.delete);
   },
 
 
   // CRUD METHODS
 
+  
+  /**
+  * asistenciaModel.delete
+  *   @description CRUD ACTION delete
+  *   @param ObjectId id Id asistencia
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await AsistenciaModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
   
   
   // Custom APIs

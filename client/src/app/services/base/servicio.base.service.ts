@@ -92,6 +92,68 @@ export class ServicioBaseService {
 
     // CRUD METHODS
 
+    /**
+    * servicioService.create
+    *   @description CRUD ACTION create
+    *   @param servicio obj Object to insert
+    *
+    */
+    create(item: Servicio): Observable<Servicio> {
+        return this.http
+            .post<Servicio>(this.contextUrl, item)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * servicioService.delete
+    *   @description CRUD ACTION delete
+    *   @param ObjectId id Id servicio
+    *
+    */
+    remove(id: string): Observable<void> {
+        return this.http
+            .delete<void>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * servicioService.get
+    *   @description CRUD ACTION get
+    *   @param ObjectId id Id servicio
+    *   @returns servicio
+    *
+    */
+    get(id: string): Observable<Servicio> {
+        return this.http
+            .get<Servicio>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * servicioService.list
+    *   @description CRUD ACTION list
+    *   @returns ARRAY OF servicio
+    *
+    */
+    list(): Observable<Servicio[]> {
+        return this.http
+            .get<Servicio[]>(this.contextUrl)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * servicioService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id servicio
+    *   @returns servicio
+    *
+    */
+    update(item: Servicio): Observable<Servicio> {
+        return this.http
+            .post<Servicio>(this.contextUrl + '/' + item._id, item)
+            .pipe(map(data => data));
+    }
+
 
     // Custom APIs
 

@@ -114,6 +114,17 @@ const generatedModel = {
   // CRUD METHODS
 
     
+  /**
+  * detalle_eventoModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id detalle_evento
+  *   @returns detalle_evento
+  *
+  */
+  async update(item) { 
+    return await generatedModel.model.findOneAndUpdate({ _id: item._id }, item, {'new': true});
+  },
+  
 
 
 };

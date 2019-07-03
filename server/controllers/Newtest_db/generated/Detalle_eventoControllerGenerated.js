@@ -59,13 +59,31 @@ const generatedControllers = {
   init: router => {
     const baseUrl = `${Properties.api}/detalle_evento`;
     router.post(baseUrl + "/add", authorize([]), Detalle_eventoController.add);
-    router.get(baseUrl + "/list/:id_evento", authorize([]), Detalle_eventoController.list);
+    router.get(baseUrl + "/:id_evento/list", authorize([]), Detalle_eventoController.list);
+    router.post(baseUrl + "/:id", authorize([]), Detalle_eventoController.update);
   },
 
 
   // CRUD METHODS
 
     
+  /**
+  * detalle_eventoModel.update
+  *   @description CRUD ACTION update
+  *   @param ObjectId id Id detalle_evento
+  *   @returns detalle_evento
+  *
+  */
+  update: async (req, res) => {
+    try {
+      const result = await Detalle_eventoModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
   
   // Custom APIs
 
