@@ -59,6 +59,7 @@ const generatedControllers = {
   init: router => {
     const baseUrl = `${Properties.api}/detalle_evento`;
     router.post(baseUrl + "/add", authorize([]), Detalle_eventoController.add);
+    router.get(baseUrl + "/findByid_evento/:key", authorize([]), Detalle_eventoController.findByid_evento);
     router.get(baseUrl + "/:id_evento/list", authorize([]), Detalle_eventoController.list);
     router.post(baseUrl + "/:id", authorize([]), Detalle_eventoController.update);
   },
@@ -66,6 +67,22 @@ const generatedControllers = {
 
   // CRUD METHODS
 
+  
+  /**
+  * detalle_eventoModel.findByid_evento
+  *   @description CRUD ACTION findByid_evento
+  *   @param Objectid key Id della risorsa id_evento da cercare
+  *
+  */
+  findByid_evento: async (req, res) => {
+    try {
+      const result = await Detalle_eventoModel.findByid_evento(req.params.key);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
     
   /**
   * detalle_eventoModel.update

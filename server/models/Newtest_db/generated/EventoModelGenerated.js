@@ -168,7 +168,6 @@ const generatedModel = {
   /**
   * eventoModel.update
   *   @description CRUD ACTION update
-  *   @param ObjectId id Id evento
   *   @returns evento
   *
   */

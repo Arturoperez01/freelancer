@@ -113,6 +113,16 @@ const generatedModel = {
 
   // CRUD METHODS
 
+  
+  /**
+  * detalle_eventoModel.findByid_evento
+  *   @description CRUD ACTION findByid_evento
+  *   @param Objectid key Id della risorsa id_evento da cercare
+  *
+  */
+  async findByid_evento(key) {
+    return await generatedModel.model.find({ 'id_evento' : key});
+  },
     
   /**
   * detalle_eventoModel.update

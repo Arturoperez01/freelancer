@@ -99,6 +99,20 @@ export class Detalle_eventoBaseService {
     // CRUD METHODS
 
     /**
+    * detalle_eventoService.findByid_evento
+    *   @description CRUD ACTION findByid_evento
+    *   @param Objectid key Id della risorsa id_evento da cercare
+    *
+    */
+    findById_evento(id: string): Observable<Detalle_evento[]> {
+        return this.http
+            .get<Detalle_evento[]>(this.contextUrl + '/findByid_evento/' + id)
+            .pipe(
+                map(response => response)
+            );
+    }
+
+    /**
     * detalle_eventoService.update
     *   @description CRUD ACTION update
     *   @param ObjectId id Id detalle_evento
