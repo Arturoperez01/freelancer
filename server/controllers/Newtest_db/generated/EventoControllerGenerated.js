@@ -60,6 +60,7 @@ const generatedControllers = {
     const baseUrl = `${Properties.api}/evento`;
     router.post(baseUrl + "", authorize([]), EventoController.create);
     router.delete(baseUrl + "/:id", authorize([]), EventoController.delete);
+    router.get(baseUrl + "/findByevento_servicio/:key", authorize([]), EventoController.findByevento_servicio);
     router.get(baseUrl + "/:id", authorize([]), EventoController.get);
     router.get(baseUrl + "", authorize([]), EventoController.list);
     router.post(baseUrl + "/:id", authorize([]), EventoController.update);
@@ -94,6 +95,22 @@ const generatedControllers = {
   delete: async (req, res) => {
     try {
       const result = await EventoModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * eventoModel.findByevento_servicio
+  *   @description CRUD ACTION findByevento_servicio
+  *   @param Objectid key Id della risorsa evento_servicio da cercare
+  *
+  */
+  findByevento_servicio: async (req, res) => {
+    try {
+      const result = await EventoModel.findByevento_servicio(req.params.key);
       res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);

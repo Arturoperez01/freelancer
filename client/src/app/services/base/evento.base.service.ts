@@ -132,6 +132,20 @@ export class EventoBaseService {
     }
 
     /**
+    * eventoService.findByevento_servicio
+    *   @description CRUD ACTION findByevento_servicio
+    *   @param Objectid key Id della risorsa evento_servicio da cercare
+    *
+    */
+    findByEvento_servicio(id: string): Observable<Evento[]> {
+        return this.http
+            .get<Evento[]>(this.contextUrl + '/findByevento_servicio/' + id)
+            .pipe(
+                map(response => response)
+            );
+    }
+
+    /**
     * eventoService.get
     *   @description CRUD ACTION get
     *   @param ObjectId id Id evento

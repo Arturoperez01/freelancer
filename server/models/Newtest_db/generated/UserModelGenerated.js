@@ -150,6 +150,16 @@ const generatedModel = {
   },
   
   /**
+  * UserModel.findByuser_servicio
+  *   @description CRUD ACTION findByuser_servicio
+  *   @param Objectid key Id della risorsa user_servicio da cercare
+  *
+  */
+  async findByuser_servicio(key) {
+    return await generatedModel.model.find({ 'user_servicio' : key});
+  },
+  
+  /**
   * UserModel.get
   *   @description CRUD ACTION get
   *   @param ObjectId id Id 

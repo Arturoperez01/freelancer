@@ -38,6 +38,7 @@ import { CanActivate, RouterModule, Routes } from '@angular/router';
 import { HomeComponent} from './pages/home/home.component';
 import { EventoEditComponent} from './pages/evento-edit/evento-edit.component';
 import { EventoListComponent} from './pages/evento-list/evento-list.component';
+import { ServicioEditComponent} from './pages/servicio-edit/servicio-edit.component';
 import { ServicioListComponent} from './pages/servicio-list/servicio-list.component';
 
 /* END MY VIEWS IMPORT */
@@ -60,6 +61,7 @@ const routes: Routes = [
     { path: 'home',  loadChildren: './pages/home/home.module#HomeModule' , canActivate: [AuthGuard] },
     { path: 'eventos/:id',  loadChildren: './pages/evento-edit/evento-edit.module#EventoEditModule' , canActivate: [AuthGuard] },
     { path: 'eventos',  loadChildren: './pages/evento-list/evento-list.module#EventoListModule' , canActivate: [AuthGuard] },
+    { path: 'servicios/:id',  loadChildren: './pages/servicio-edit/servicio-edit.module#ServicioEditModule' , canActivate: [AuthGuard] },
     { path: 'servicios',  loadChildren: './pages/servicio-list/servicio-list.module#ServicioListModule' , canActivate: [AuthGuard] },
 
  /* END MY VIEWS */

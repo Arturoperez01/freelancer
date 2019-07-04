@@ -145,6 +145,16 @@ const generatedModel = {
   },
   
   /**
+  * eventoModel.findByevento_servicio
+  *   @description CRUD ACTION findByevento_servicio
+  *   @param Objectid key Id della risorsa evento_servicio da cercare
+  *
+  */
+  async findByevento_servicio(key) {
+    return await generatedModel.model.find({ 'evento_servicio' : key});
+  },
+  
+  /**
   * eventoModel.get
   *   @description CRUD ACTION get
   *   @param ObjectId id Id evento

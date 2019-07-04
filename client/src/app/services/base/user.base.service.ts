@@ -136,6 +136,20 @@ export class UserBaseService {
     }
 
     /**
+    * UserService.findByuser_servicio
+    *   @description CRUD ACTION findByuser_servicio
+    *   @param Objectid key Id della risorsa user_servicio da cercare
+    *
+    */
+    findByUser_servicio(id: string): Observable<User[]> {
+        return this.http
+            .get<User[]>(this.contextUrl + '/findByuser_servicio/' + id)
+            .pipe(
+                map(response => response)
+            );
+    }
+
+    /**
     * UserService.get
     *   @description CRUD ACTION get
     *   @param ObjectId id Id 

@@ -62,6 +62,7 @@ const generatedControllers = {
     router.post(baseUrl + "/:id/changePassword", authorize(["ADMIN"]), UserController.changePassword);
     router.post(baseUrl + "", authorize([]), UserController.create);
     router.delete(baseUrl + "/:id", authorize([]), UserController.delete);
+    router.get(baseUrl + "/findByuser_servicio/:key", authorize([]), UserController.findByuser_servicio);
     router.get(baseUrl + "/:id", authorize([]), UserController.get);
     router.get(baseUrl + "", authorize([]), UserController.list);
     router.post(baseUrl + "/:id", authorize([]), UserController.update);
@@ -95,6 +96,22 @@ const generatedControllers = {
   delete: async (req, res) => {
     try {
       const result = await UserModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+  
+  /**
+  * UserModel.findByuser_servicio
+  *   @description CRUD ACTION findByuser_servicio
+  *   @param Objectid key Id della risorsa user_servicio da cercare
+  *
+  */
+  findByuser_servicio: async (req, res) => {
+    try {
+      const result = await UserModel.findByuser_servicio(req.params.key);
       res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);
