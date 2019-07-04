@@ -58,7 +58,7 @@ const routes: Routes = [
     /* START MY VIEWS */
 
     { path: 'home',  loadChildren: './pages/home/home.module#HomeModule' , canActivate: [AuthGuard] },
-    { path: 'eventos/:action/:id',  loadChildren: './pages/evento-edit/evento-edit.module#EventoEditModule' , canActivate: [AuthGuard] },
+    { path: 'eventos/:id',  loadChildren: './pages/evento-edit/evento-edit.module#EventoEditModule' , canActivate: [AuthGuard] },
     { path: 'eventos',  loadChildren: './pages/evento-list/evento-list.module#EventoListModule' , canActivate: [AuthGuard] },
     { path: 'servicios',  loadChildren: './pages/servicio-list/servicio-list.module#ServicioListModule' , canActivate: [AuthGuard] },
 
