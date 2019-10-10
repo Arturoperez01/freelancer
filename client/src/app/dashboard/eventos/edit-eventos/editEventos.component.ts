@@ -140,7 +140,6 @@ export class  EditEventosComponent implements OnInit {
           } else {
               // Create
               //const hash = new SHA3(512);
-              console.log(data);
 
               //hash.update(this.user.password);
               //this.user.password = hash.digest('hex');
@@ -191,11 +190,9 @@ export class  EditEventosComponent implements OnInit {
     }
     
     onAddPerfil(perfil){
-        console.log(perfil.value)
         if (perfil.value) {
             //this.user.perfiles.push(perfil.value.toUpperCase());
             this.form.controls['details']['controls']['perfiles'].value.push(perfil.value.toUpperCase());
-            console.log(this.form);
             perfil.value = '';
         }
     };
