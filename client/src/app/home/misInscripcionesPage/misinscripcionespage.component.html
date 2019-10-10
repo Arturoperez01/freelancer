@@ -1,0 +1,33 @@
+
+    <mdb-card class="rounded" cascade="true" narrower="true">
+    
+        <div class="view view-cascade overlay blue-gradient lighten-1">
+                <h4 class="card-header-title pt-3 px-3"><strong>Inscripciones</strong></h4>
+                <p class="px-3">Todos las Inscripciones subscritas:</p>
+        </div>
+        
+        <mdb-card-body cascade="true" class="text-center">
+                
+                <h1 class="p-3 mb-5 mt-5" *ngIf="inscripciones.length==0">
+                    No existen entradas en la base de datos
+                </h1>
+                <table *ngIf="inscripciones.length!=0" mdbTable>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Evento</th>
+                            <th>Horas</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let inscripcion of inscripciones">
+                        <td>{{inscripcion.idTurno.fecha | date:"dd/M/yyyy"}}</td>
+                        <td>{{inscripcion.idEvento.titulo}}</td>
+                        <td>de: {{inscripcion.idTurno.horaIni}} hasta: {{inscripcion.idTurno.horaFin}}</td>
+                        <td><a class="round btn-sm success-color" [routerLink]="[ '/home/misinscripciones',user._id]" ><i class="fa-eye fas"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+        </mdb-card-body>
+    </mdb-card>

@@ -1,0 +1,59 @@
+<!-- div class="full">
+    <h3>All registered users:</h3>
+    <ul>
+        <li *ngFor="let user of users">
+            {{user.email}} ({{user.name}}
+            - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+        </li>
+    </ul>
+</div-->
+    
+<mdb-card class="rounded" cascade="true" narrower="true">
+
+    <!--Card image>
+    <div class="view view-cascade  gradient-card-header purple-gradient text-left" >
+            <h4 class="card-header-title"><strong>Usuarios</strong></h4>
+            <p>Todos los usuarios registrados: </p>
+    </div>
+    
+    <Card image-->
+
+    <div class="view view-cascade overlay blue-gradient lighten-1">
+            <a class="round btn-lg success-color float-right" [routerLink]="['new']"><i class="fa-plus fas"></i></a>
+            <h4 class="card-header-title pt-3 px-3"><strong>Usuarios</strong></h4>
+            <p class="px-3">Todos los usuarios registrados:</p>
+            <!-- mdb-icon far icon="money-bill-alt" class="Secondary-color text-right"></mdb-icon-->
+    </div>
+    
+    <mdb-card-body cascade="true" class="text-center">
+            
+            <h1 class="p-3 mb-5 mt-5" *ngIf="users.length==0">
+                No existen entradas en la base de datos
+            </h1>
+            <table *ngIf="users.length!=0" mdbTable>
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>name</th>
+                        <th>rol</th>
+                        <th>perfil</th>
+                        <th>servicio</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mdbTableCol *ngFor="let user of users">
+                    <td>{{user.email}}</td>
+                    <td>{{user.username}}</td>
+                    <td><span *ngFor="let rol of user.roles" class="badge badge-primary mx-1">{{rol}}</span>&nbsp;</td>
+                    <td><span *ngFor="let perfile of user.perfiles" class="badge badge-primary mx-1">{{perfile}}</span> </td>
+                    <td><span *ngFor="let servicio of user.servicios" class="badge badge-primary mx-1">{{servicio}}</span> </td>
+                    <td>
+                        <a class="round btn-sm danger-color float-right mx-1" (click)="deleteUser(user._id)"><i class="fa-minus fas"></i></a>
+                        <a class="round btn-sm success-color float-right mx-1" [routerLink]="[user._id]"><i class="fa-pencil-alt fas"></i></a>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>    
+    </mdb-card-body>
+</mdb-card>

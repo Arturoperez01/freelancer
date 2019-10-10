@@ -1,0 +1,94 @@
+<mat-drawer-container class="example-container">
+    
+        <!-- Sidebar -->
+    <!-- div class="sidebar-fixed position-fixed collapse">
+
+        <a class="logo-wrapper waves-effect">
+            <img src="../../../../assets/img/angular-mdb.png" class="img-fluid" alt="">
+        </a>
+
+        <div class="list-group list-group-flush">
+
+            <a routerLink="dashboards/v1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <mdb-icon fas icon="users" class="mr-3"></mdb-icon>Users
+            </a>
+            <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <mdb-icon fas icon="user" class="mr-3"></mdb-icon>Profile</a>
+            <a routerLink="tables/table1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <mdb-icon fas icon="table" class="mr-3"></mdb-icon>Tables</a>
+            <a routerLink="maps/map1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <mdb-icon far icon="map" class="mr-3"></mdb-icon>Maps</a>
+            <a routerLink="nonExistingPath" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <mdb-icon fas icon="exclamation" class="mr-3"></mdb-icon>404</a>
+
+        </div>
+
+    </div -->
+    <!-- Sidebar -->
+
+    <!--Navbar-->
+    <div class="navbar navbar-expand-lg fixed-top primary-color">
+        
+            <!-- ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button class="nav-link" (click)="side.toggle()" >
+                        <mdb-icon fas icon="bars"></mdb-icon>
+                    </button>
+                </li>
+                <button type="button" mat-button (click)="drawer.toggle()">
+                  Toggle sidenav
+                </button>
+            <ul-->
+
+            <div class="example-sidenav-content">
+                    <button type="button" mat-button (click)="side.toggle()">
+                        <mdb-icon fas icon="bars"></mdb-icon>
+                    </button>
+            </div>
+
+    </div>
+    <!--/.Navbar-->
+
+    <mat-drawer #side class="example-sidenav" mode="side" opened="true">
+        <aside class="main-sidebar sidebar-fixed" >
+            <section class="sidebar-menu tree" data-widget="tree" >
+                
+                    <a class="logo-wrapper waves-effect" [routerLink]="['dashboard']">
+                            <img src="/assets/angular-mdb.png" class="img-fluid" alt="">
+                        </a>
+                    <!-- logo class="ml-3">
+                            <a class="navbar-brand" [routerLink]="['dashboard']">
+                                <strong class="blue-text">MDB</strong>
+                            </a>
+                    </logo -->
+                    <div class="sidebar-menu tree list-group list-group-flush">
+                            <a  class="list-group-item list-group-item-action waves-effect" (click)="user.toggle()">
+                            <mdb-icon fas icon="cogs" class="mr-3"></mdb-icon>Administracion
+                            </a>          
+                            <div class="sidebar-menu tree list-group" mdbCollapse #user="bs-collapse">
+                            
+                                        <a [routerLink]="['user']" class="list-group-item list-group-item-action waves-effect" >
+                                            Usuarios
+                                        </a>
+                                        <a [routerLink]="['servicios']" class="list-group-item list-group-item-action waves-effect" >
+                                            Servicio
+                                        </a>
+                                        <a [routerLink]="['roles']" class="list-group-item list-group-item-action waves-effect">
+                                            Roles
+                                        </a>
+                            </div>
+
+                            <a  class="list-group-item list-group-item-action waves-effect" (click)="evento.toggle()">
+                                <mdb-icon fas icon="calendar-alt" class="mr-3"></mdb-icon>Eventos                               
+                            </a>          
+                            <div class="sidebar-menu tree list-group" data-widget="tree" mdbCollapse #evento="bs-collapse">
+                                
+                                <a [routerLink]="['eventos']" class="list-group-item list-group-item-action waves-effect" >
+                                    lista de Eventos
+                                </a>
+                            </div>
+                    </div>
+            </section>
+        </aside>
+    </mat-drawer>
+</mat-drawer-container>

@@ -1,0 +1,60 @@
+<!-- div class="full">
+    <h3>All registered users:</h3>
+    <ul>
+        <li *ngFor="let user of users">
+            {{user.email}} ({{user.name}}
+            - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+        </li>
+    </ul>
+</div-->
+    
+<mdb-card class="rounded" cascade="true" narrower="true">
+
+    <!--Card image>
+    <div class="view view-cascade  gradient-card-header purple-gradient text-left" >
+            <h4 class="card-header-title"><strong>Usuarios</strong></h4>
+            <p>Todos los usuarios registrados: </p>
+    </div>
+    
+    <Card image-->
+
+    <div class="view view-cascade overlay blue-gradient lighten-1">
+            <a class="round btn-lg success-color float-right" (click)="test.toggle()"><i class="fa-plus fas"></i></a>
+            <h4 class="card-header-title pt-3 px-3"><strong>Roles</strong></h4>
+            <p class="px-3">Todos los roles registrados:</p>
+            <!-- mdb-icon far icon="money-bill-alt" class="Secondary-color text-right"></mdb-icon-->
+    </div>
+    
+    <mdb-card-body cascade="true" class="text-center">
+            
+        <div mdbCollapse #test="bs-collapse">
+            
+            <div class="col-xs-12 col-md-4 offset-md-4 mb-4">
+                    <h3 *ngIf="roles.length==0">
+                        Agregar nuevo rol:
+                    </h3>
+                    <dynamic-form [config]="config"  
+                    #form="dynamicForm"
+                    (submit)="formSubmit($event)"> </dynamic-form>
+            </div>
+            <hr>
+        </div>
+            <h1 class="p-3 mb-5 mt-5" *ngIf="roles.length==0">
+                No existen entradas en la base de datos
+            </h1>
+            <table *ngIf="roles.length!=0" mdbTable>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mdbTableCol *ngFor="let rol of roles">
+                    <td>{{rol.name}}</td>
+                    <td><a class="round btn-sm danger-color" (click)="deleteRoles(rol._id)"><i class="fa-minus fas"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+    </mdb-card-body>
+</mdb-card>

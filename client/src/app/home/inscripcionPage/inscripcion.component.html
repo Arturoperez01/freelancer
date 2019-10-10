@@ -1,0 +1,69 @@
+<div class="row my-5">
+    <div class="col-md-12">
+        <h4 class="card-header-title pt-3 px-3 text-center"><strong>Turnos:</strong></h4>
+    </div>
+    <div class="col-md-6">
+        <mdb-card class="rounded" cascade="true" narrower="true">
+            <div class="view view-cascade overlay blue-gradient lighten-1">
+                    <h4 class="card-header-title pt-3 px-3"><strong>Todos los turnos habiles:</strong></h4>
+            </div>
+            
+            <mdb-card-body cascade="true" class="text-center">
+                    
+                    <h1 class="p-3 mb-5 mt-5" *ngIf="turnos.length==0">
+                        No existen entradas en la base de datos
+                    </h1>
+                    <table *ngIf="turnos.length!=0" mdbTable>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora inicial</th>
+                                <th>Hora final</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr mdbTableCol *ngFor="let turno of turnos">
+                            <td>{{turno.fecha | date:"dd/M/yyyy" }}</td>
+                            <td>{{turno.horaIni}}</td>
+                            <td>{{turno.horaFin}}</td>
+                            <td><a class="round btn-sm success-color" (click)="addInscripcion(turno._id)"><i class="fa-plus fas"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+    <div class="col-md-6">
+        <mdb-card class="rounded" cascade="true" narrower="true">
+            <div class="view view-cascade overlay blue-gradient lighten-1">
+                    <h4 class="card-header-title pt-3 px-3"><strong>Todos los turnos tomados:</strong></h4>
+            </div>
+            
+            <mdb-card-body cascade="true" class="text-center">
+                    
+                    <h1 class="p-3 mb-5 mt-5" *ngIf="inscripciones.length==0">
+                        No existen entradas en la base de datos
+                    </h1>
+                    <table *ngIf="inscripciones.length!=0" mdbTable>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora inicial</th>
+                                <th>Hora final</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr mdbTableCol *ngFor="let inscripcion of inscripciones; let i = index">
+                                <td>{{inscripcion.fecha  | date:"dd/M/yyyy" }}</td>
+                                <td>{{inscripcion.horaIni}}</td>
+                                <td>{{inscripcion.horaFin}}</td>
+                                <td><a class="round btn-sm danger-color" (click)="removeInscripcion(i)"><i class="fa-minus fas"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

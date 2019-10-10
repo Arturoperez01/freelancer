@@ -1,0 +1,142 @@
+
+<header class="h-100">
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo intro-fixed-nav" [containerInside]="false">
+      <mdb-navbar-brand>
+        <a class="logo navbar-brand" href="#">
+          <strong>Navbar</strong>
+        </a>
+      </mdb-navbar-brand>
+      <links>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active waves-light" mdbWavesEffect>
+            <a class="nav-link" [routerLink]="[ '/home']">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+        </ul>
+        
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item avatar dropdown" *ngIf="!login">
+              <a mdbWavesEffect type="button" (click)="basicModal.show()" class="nav-link waves-light" mdbWavesEffect>
+                  Login/Sign-up<mdb-icon fas icon="sign-in-alt"></mdb-icon>
+              </a>
+            </li>
+            <li class="nav-item avatar dropdown" *ngIf="login">
+              <a mdbWavesEffect type="button" (click)="logOff()" class="nav-link waves-light" mdbWavesEffect>
+                  Log-out<mdb-icon fas icon="sign-out-alt"></mdb-icon>
+              </a>
+            </li>
+          </ul>
+      </links>
+    </mdb-navbar>
+    
+    <div class="view cover intro-2" *ngIf="!login" >
+      <div class="full-bg-img">
+        <div class="mask rgba-purple-light flex-center">
+          <div class=" text-center white-text wow fadeInUp ">
+            <h2>This Navbar is fixed and transparent</h2>
+            <br>
+            <h5>It will always stay visible on the top, even when you scroll down</h5>
+            <p>Navbar's background will switch from transparent to solid color while scrolling down</p>
+            <br>
+            <p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /.Main -->
+</header>
+  
+<!-- Main -->
+<main>
+
+  <div class="main-wrapper py-5">
+      <div class="container">
+        <router-outlet>              
+        </router-outlet>  
+      </div>
+    <!--/Modal: Login & Register tabs-->
+  </div>
+
+<footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn indigo">
+    <div class="footer-copyright text-center py-3">
+      <b>Version</b> 1.0.1
+      <strong>Copyright © 2018-19 Konecta.</strong> Todos los derechos reservados.
+    </div>
+</footer> 
+
+</main>
+<!--  div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+          <my-login-form [error]="message" (submitEM)="onSubmit($event)"></my-login-form>
+    </div>
+  </div>
+</div-->
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <!--Modal: Login & Register tabs-->
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav md-pills nav-justified pills-primary mt-4 mx-4" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab"><i class="fas fa-user mr-1"></i>
+              Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel2" role="tab"><i class="fas fa-user-plus mr-1"></i>
+              Register</a>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content pt-3">
+          <!--Panel 1-->
+          <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body mb-1">
+              <my-login-form [error]="message" (submitEM)="onLogin($event)"></my-login-form>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer display-footer">
+              <!-- div class="options text-center text-md-right mt-1">
+                <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
+                <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+              </div-->
+              <button type="button" class="btn btn-outline-primary waves-effects ml-auto" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+          <!--/.Panel 1-->
+
+          <!--Panel 2-->
+          <div class="tab-pane fade in show" id="panel2" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body">
+              <my-sign-up-form [error]="message" (submitEM)="onSignup($event)"></my-sign-up-form>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <!-- div class="options text-right">
+                <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
+              </div-->
+              <button type="button" class="btn btn-outline-primary waves-effect ml-auto" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!--/.Panel 2-->
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->

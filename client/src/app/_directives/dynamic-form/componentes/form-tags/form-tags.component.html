@@ -1,0 +1,38 @@
+<div class="row" [formGroup]="group">
+    <div class="form-group col-md-12">
+    <h3 class="text-left">{{this.config['name']}}</h3>
+      <div class="row">
+        <div class="col-md-10" >
+              <input 
+              mdbInput
+              [attr.placeholder]="config.placeholder"
+               type="text" class="form-control mt-2" id="{{this.config['name']}}Tags" name="{{this.config['name']}}Tags" #newTags>
+        </div>
+        <div clas="col-md-2">
+          <span class="round btn-sm primary-color float-right " (click)="addTags(newTags)">
+              <i class="fa fa-plus"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  <!-- NO Tags -->
+  <div class="col-md-12">
+    <label class="text-left" *ngIf="!tagsArray || tagsArray.length==0">
+        No {{this.config['name']}} assigned
+    </label>
+  </div>
+  <!-- NO tags -->
+    <div formArrayName="{{this.config['name']}}" class="col-md-12">
+        <div class="row" *ngFor="let tag of tagsArray.controls; let i = index; " [formGroup]="tag">
+          <div class="col-md-10 mt-2">
+          
+              <input type="text" class="form-control" id="tag{{i}}" [formControl]="tag.get('tagEntry')" name="tagEntry_{{i}}">
+          </div>
+          <div class="col-md-2 mt-2">
+            <span class="round btn-sm danger-color float-right" (click)="removeRole(i)">
+              <i class="fa fa-trash"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+</div>

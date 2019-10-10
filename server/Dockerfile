@@ -24,7 +24,7 @@
 #      https://app.skaffolder.com/#!/upgrade
 #
 # Or get up to 70% discount sharing your unique link:
-#       https://beta.skaffolder.com/#!/register?friend=5d122668c0161c5b2b76f322
+#       https://beta.skaffolder.com/#!/register?friend=5d0ce5dbf311412fe6ea5315
 #
 # You will get 10% discount for each one of your friends
 # 

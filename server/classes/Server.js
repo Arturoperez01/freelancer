@@ -24,7 +24,7 @@
 *      https://app.skaffolder.com/#!/upgrade
 *
 * Or get up to 70% discount sharing your unique link:
-*       https://beta.skaffolder.com/#!/register?friend=5d122668c0161c5b2b76f322
+*       https://beta.skaffolder.com/#!/register?friend=5d0ce5dbf311412fe6ea5315
 *
 * You will get 10% discount for each one of your friends
 * 
@@ -58,12 +58,12 @@ import SecurityController from "../controllers/SecurityController";
 import Database_Newtest_db from "./Database_Newtest_db.js";
 
 // Controllers
-import UserController from "../controllers/Newtest_db/UserController";
-import AsistenciaController from "../controllers/Newtest_db/AsistenciaController";
-import Detalle_eventoController from "../controllers/Newtest_db/Detalle_eventoController";
-import EventoController from "../controllers/Newtest_db/EventoController";
-import RolesController from "../controllers/Newtest_db/RolesController";
+import UserController     from "../controllers/Newtest_db/UserController";
+import RolesController    from "../controllers/Newtest_db/RolesController";
 import ServicioController from "../controllers/Newtest_db/ServicioController";
+import EventoController   from "../controllers/Newtest_db/EventoController";
+import TurnoController   from "../controllers/Newtest_db/TurnoController";
+import InscripcionController   from "../controllers/Newtest_db/InscripcionController";
 
 // End Import Controllers
 
@@ -136,12 +136,12 @@ class Server {
     SecurityController.init(router);
 
     // Start Init Controllers
-		UserController.init(router);
-		AsistenciaController.init(router);
-		Detalle_eventoController.init(router);
-		EventoController.init(router);
-		RolesController.init(router);
-		ServicioController.init(router);
+    UserController.init(router);
+    RolesController.init(router);
+    ServicioController.init(router);
+    EventoController.init(router);
+    TurnoController.init(router);
+    InscripcionController.init(router);
 		 // End Init Controllers
 
     this.app.use("/", router);

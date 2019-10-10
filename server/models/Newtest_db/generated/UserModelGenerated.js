@@ -24,7 +24,7 @@
 *      https://app.skaffolder.com/#!/upgrade
 *
 * Or get up to 70% discount sharing your unique link:
-*       https://beta.skaffolder.com/#!/register?friend=5d122668c0161c5b2b76f322
+*       https://beta.skaffolder.com/#!/register?friend=5d0ce5dbf311412fe6ea5315
 *
 * You will get 10% discount for each one of your friends
 * 
@@ -64,18 +64,12 @@ const generatedModel = {
       * User
       */
     const userSchema = new mongoose.Schema({
-      mail: {
-        type: "String"
-      },
       name: {
         type: "String"
       },
       password: {
         type: "String", 
         required : true
-      },
-      perfiles: {
-        type: "String"
       },
       roles: [{
         type: "String"
@@ -88,18 +82,10 @@ const generatedModel = {
         required : true
       },
       //RELATIONS
-      user_servicio: [{
-        type: Schema.ObjectId,
-        ref : "servicio"
-      }],
       
       
       //EXTERNAL RELATIONS
       /*
-      id_usuario_asistencia: {
-        type: Schema.ObjectId,
-        ref : "asistencia"
-      },
       */
     });
 
@@ -128,7 +114,7 @@ const generatedModel = {
 
   // CRUD METHODS
 
-    
+  
   /**
   * UserModel.create
   *   @description CRUD ACTION create
@@ -147,16 +133,6 @@ const generatedModel = {
   */
   async delete(id) {
     return await generatedModel.model.findByIdAndRemove(id);
-  },
-  
-  /**
-  * UserModel.findByuser_servicio
-  *   @description CRUD ACTION findByuser_servicio
-  *   @param Objectid key Id della risorsa user_servicio da cercare
-  *
-  */
-  async findByuser_servicio(key) {
-    return await generatedModel.model.find({ 'user_servicio' : key});
   },
   
   /**

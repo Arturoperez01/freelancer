@@ -1,0 +1,257 @@
+
+
+<mdb-card class="rounded" cascade="true" narrower="true" *ngIf="!loading">
+
+    <!--Card image>
+    <div class="view view-cascade  gradient-card-header purple-gradient text-left" >
+            <h4 class="card-header-title"><strong>Usuarios</strong></h4>
+            <p>Todos los usuarios registrados: </p>
+    </div>
+    
+    <Card image-->
+
+    <div class="view view-cascade overlay blue-gradient lighten-1">
+            <h1>{{title}}</h1>
+            <!-- mdb-icon far icon="money-bill-alt" class="Secondary-color text-right"></mdb-icon-->
+    </div>
+    <div class="card-body" >
+        <form class="form-horizontal" [formGroup]="form" >
+            <div  formGroupName="details" >
+                <div class="row">
+                    <div class="form-group col-4"> 
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" class="form-control" id="titulo"  formControlName="titulo"><!-- [(ngModel)]="eventos.titulo" name="titulo" #titulo="ngModel" required [disabled]="eventos._id"-->
+                            <label style="color: red" *ngIf="form.controls['details'].controls['titulo'].hasError('required') && (form.controls['details'].controls['titulo'].dirty || form.controls['details'].controls['titulo'].touched)">Requerido</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                            <label for="servicio">Servicio</label>
+                            <!-- input type="text" class="form-control" id="servicio" [(ngModel)]="eventos.servicio" name="servicio" #servicio="ngModel" -->
+                            <select formControlName="servicio"  class='form-control campos campos-borde'>
+                                <option value="" disabled>Selecciona el servicio</option>
+                                <option *ngFor="let servicio of servicios" [ngValue]="servicio.nombre">
+                                {{servicio.nombre}}
+                                </option>
+                            </select>
+                            <label style="color: red" *ngIf="form.controls['details'].controls['servicio'].hasError('required') && (form.controls['details'].controls['servicio'].dirty || form.controls['details'].controls['servicio'].touched)">Requerido</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-4">
+                        <div class="form-group">
+                        <label for="titulo">Limite</label>
+                        <input type="text" class="form-control"  formControlName="limite"><!-- [(ngModel)]="eventos.titulo" name="titulo" #titulo="ngModel" required [disabled]="eventos._id"-->
+                        <label style="color: red" *ngIf="form.controls['details'].controls['limite'].hasError('required') && (form.controls['details'].controls['limite'].dirty || form.controls['details'].controls['limite'].touched)">Requerido</label>
+                        </div>
+                    </div>
+                </div>        
+                <div class="row">
+                    <div class="form-group col-12">
+                        <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea formControlName="descripcion" class="form-control campos campos-borde" rows="5"> </textarea>
+                                <label style="color: red" *ngIf="form.controls['details'].controls['descripcion'].hasError('required') && (form.controls['details'].controls['descripcion'].dirty || form.controls['details'].controls['descripcion'].touched)">Requerido</label>                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12"> 
+                        <h3>Perfiles</h3>
+                    </div>
+                    <div class="form-group col-11">
+                        <input type="text" class="form-control" name="newPerfil" #newPerfil>
+                    </div>
+                    <div class="col-1">
+                        <span class="round btn-sm primary-color float-right" (click)="onAddPerfil(newPerfil)">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                    </div>
+                </div>
+                <!-- NO ROLES -->
+                <label *ngIf="form.controls['details'].controls['perfiles'].value.length==0">
+                    No hay perfiles asignado al evento
+                </label>
+                <!-- NO ROLES -->
+                <div class="row my-3">
+                    
+                    <div class="form-group"  class="col-12">
+                        <mdb-badge *ngFor="let perfil of form.controls['details']['controls']['perfiles'].value; let i = index; trackBy:trackByFn" 
+                                    class="mx-1"
+                                pill="true" primary="true">{{perfil}} <span (click)="form.controls['details']['controls']['perfiles'].value.splice(i,1)">
+                        <i class="fa fa-times-circle"></i></span> 
+                    </mdb-badge>
+                    </div>
+                    <!--label style="color: red" *ngIf="form.controls['perfiles'].hasError('required') && (form.controls['perfiles'].dirty || form.controls['perfiles'].touched)">Requerido</label-->
+                            
+                    <!-- span class="badge badge-primary">{{perfil}}</span-->
+                </div>
+            </div>
+            <div class="row" *ngIf='id=="new"'>
+                <h3>Turno</h3>
+                <div class="col-12">
+                    <div class="row" formGroupName="options">
+                    <!-- div class="row" [(ngModel)]="options" existdate equalval exmin-->
+                        <div class="form-group col-3">
+                            <label for="name">Fecha</label>
+                            <input type="date" class="form-control" name="fecha" min="{{today}}" formControlName="fecha">
+                            <!-- input type="date" class="form-control" name="fecha" min="{{today}}" [(ngModel)]="options.fecha" -->
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="horaini">Hora Inicial</label>
+                            
+                            <select name="horaIni" formControlName="horaIni" class='form-control'>
+                            <!--select name="horaIni" [(ngModel)]="options.horaini" #horaini="ngModel" required class='form-control'-->
+                                <option value="" disabled>Selecciona la hora</option>
+                                <option *ngFor="let hora of horas" >
+                                  {{ hora.hora }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="horafin">Hora Final</label>
+                            <select name="horaFin" formControlName="horaFin" class='form-control'>
+                            <!-- select  name="horaFin" [(ngModel)]="options.horafin" #horafin="ngModel" required class='form-control' -->
+                               <option value="" disabled>Selecciona la hora</option>
+                               <option *ngFor="let hora of horas" >
+                                 {{ hora.hora }}
+                               </option>
+                             </select>
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="cupo">Cupo</label>
+                            <input type="number" class="form-control" name="cupo" formControlName="cupo"> 
+                            <!--input type="number" class="form-control" id="cupo" name="cupo" [(ngModel)]="options.cupo" #cupo="ngModel" required--> 
+                        </div>  
+                    </div>
+                    
+                    <!-- div class="col-sm-12  text-center" >
+                          <div class ="alert alert-danger" style="color: red" *ngIf="((form.controls['options'].controls['horaIni'].touched&&form.controls['options'].controls['horaFin'].touched)&&(form.controls['options'].hasError('exmin')||form.controls['options'].hasError('equalval')))">La hora minima excede el maximo o es igual al maximo</div>
+                          <div class ="alert alert-danger" style="color: red" *ngIf="(form.hasError('existdate'))">La jornada de trabajo que se quiere ingresar esta en el rango de trabajo de que existe.</div>
+                    </div-->
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary text-center pull-rigt mb-20" 
+                    [disabled]="!form.controls['options'].valid||form.hasError('existdate')" (click)="onAddDetalle()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <h5 *ngIf="!form.controls['turnos'] || form.controls['turnos'].controls.length==0" class="text-center p-5">
+                    No hay turnos asignado al evento 
+            </h5>
+            <!-- NO ROLES -->
+            <div  *ngIf="form.controls['turnos'].controls.length > 0"class="row mt-2">
+            
+                <div class="col-sm-12">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-2" >
+                                    <label class="control-label" >Fecha</label>                              
+                            </div>
+                            <div class="col-sm-2" >
+                                    <label class="control-label" >Hora inicial</label>                              
+                            </div>
+                            <div class="col-sm-2" >
+                                    <label class="control-label" >Hora Final</label>                            
+                            </div>
+                        
+                            <div class="col-sm-2" >
+                                        <label class="control-label" >Cupo</label>                          
+                            </div>
+                        
+                            <div class="col-sm-2" >
+                                    <label class="control-label" >Estado</label>                            
+                            </div>
+                            <div class="col-sm-2" *ngIf="id=='new'">
+                                    <label class="control-label" >Accion</label>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="container" formArrayName="turnos">
+                        
+                          <div class="row justify-content-center campos campos-borde" *ngFor="let d of form.controls['turnos'].controls ; let i = index " [formGroup]="d">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <!--label class="control-label" >Fecha</label-->
+                                        <div class="col-sm-12" >
+                                            <!--input type="text"  class="form-control input-sm"  formControlName="date" [(ngModel)]="d.date" disabled -->
+                                            {{d.value.fecha | date:"dd/M/yyyy"}}
+                                        </div>
+                                        </div>   
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <!--label class="control-label" >Fecha</label-->
+                                        <div class="col-sm-12" >
+                                        <!--input type="text"  class="form-control input-sm"  formControlName="date" [(ngModel)]="d.date" disabled -->
+                                        {{d.value.horaIni}}
+                                        </div>
+                                    </div>   
+                                </div>
+                              
+                                <div class="col-sm-2">
+                                        <div class="form-group">
+                                        <!--label class="control-label" >Hora</label-->
+                                        <div class="col-sm-12" >
+                                            <!--input type="number"  class="form-control input-sm"  formControlName="horaIni" [(ngModel)]="d.hora" disabled -->
+                                            {{d.value.horaFin}}
+                                        </div>
+                                        </div>                    
+                                </div>
+
+                                
+                                
+                                <div class="col-sm-2">
+                                        <div class="form-group">
+                                        <!--label class="control-label" >Cupo</label-->
+                                        <div class="col-sm-12" >
+                                            <input type="number"  class="form-control input-sm campos campos-borde"  formControlName="cupo">
+                                            / {{d.value.inscripciones }} inscritos
+                                        </div>
+                                        </div>                    
+                                </div>
+                                
+                                
+                                <div class="col-sm-2">
+                                        <div class="form-group">
+                                        <div class="col-sm-12" >
+                                        <!--label class="control-label" >Estado</label-->
+                                            <select formControlName="estado" *ngIf="d.value.id!=0" class="form-control input-sm campos campos-borde">
+                                            <option value="activado" >activado</option>
+                                            <option value="desactivado" >
+                                            desactivado
+                                            </option>
+                                        </select>
+                                            <div *ngIf="d.value.id==0">
+                                            {{d.value.estado}}
+                                            </div>
+                                        </div>
+                                        </div>                    
+                                </div>
+                                <div class="col-sm-2" *ngIf="id=='new'">
+                                    <div class="form-group">
+                                        <div class="col-sm-12" >
+                                        <button class="btn btn-danger boton boton-borde boton-resaltar" (click)="form.get('turnos').removeAt(i)"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>                    
+                                </div>
+                          
+                          </div>   
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-default pull-left boton boton-borde boton-resaltar" (click)="goBack()"> Volver </button>
+                            
+            <button type="submit" class="btn btn-info pull-right boton boton-borde boton-resaltar"  
+             
+             [disabled]="form.controls['details'].invalid||form.value.turnos.length  == 0"  
+             (click)="save()">GUARDAR</button>
+        </form>    
+    </div>
+</mdb-card>
