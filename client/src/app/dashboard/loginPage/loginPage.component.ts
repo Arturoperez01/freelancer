@@ -2,9 +2,9 @@ import { Component }        from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SecurityService } from '../../_auth/services/security.service'
 import { AlertService } from '../../_services';
-import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_auth/authentication.service';
-
+import { store } from '../../_auth/current-user';
+import { User } from '../../_models/user'
 import { SHA3 } from 'sha3';
 
 @Component({
@@ -37,24 +37,16 @@ export class LoginPageComponent {
 
   onSubmit(data) {    
     
-    const hash = new SHA3(512);
-    hash.update(data.password);
-    const sha3pass = hash.digest('hex');
-    ///*/
-    this.securityService.login(data.username, sha3pass, data.remember)
-    //.pipe(first())
-    .subscribe(
-        data => {
-            //console.log(data);
-            this.router.navigate(['dashboard/']);
-        },
-        error => {
-            //console.log(error);
-            this.alertService.error("El correo o la contraseña no son correctos");
-            //this.alertService.error(error);
-            //this.loading = false;
-        });
-    //*/
+    if(!data.status){    
+      //location.reload();  
+      this.setUser(data);
+      this.router.navigate(['dashboard/']);
+    }else{
+      this.alertService.error(data.statusText)
+    };
   }
 
+    private setUser(user: User) {
+        store.setUser(user);
+    }
 }

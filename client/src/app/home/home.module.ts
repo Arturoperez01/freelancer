@@ -31,8 +31,7 @@ import { AuthGuard }                          from '../auth/auth.guard';
     IndexComponent,
     SignupFormComponent,
     MisEventosComponent,
-    MisInscripcionesComponent,
-    LoginFormComponent
+    MisInscripcionesComponent
   ],
   providers: [EventoService, InscripcionService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

@@ -60,8 +60,7 @@ import { AuthGuard }                          from '../auth/auth.guard';
     RolesPageComponent,
     UserFormComponent,
     HomePageComponent,
-    ServicioPageComponent,
-    LoginFormComponent
+    ServicioPageComponent//, LoginFormComponent
   ],
   providers: [ServicioService,RolesService,UserFormService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

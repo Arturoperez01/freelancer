@@ -4,7 +4,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import { Inscripcion } from '../../../_models/inscripcion/inscripcion';
 
-//import { store } from '../../_auth/current-user';
+import { store } from '../../../_auth/current-user';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/_services';
 import { EventoService } from 'src/app/_services/evento.service';
@@ -62,19 +62,13 @@ export class MisInscripcionesComponent {
                   private router: Router,
                   private route: ActivatedRoute
                 ) {
-            
+      store.currentUser$.subscribe(user =>this.user = user);    
       this.getData();
-      
     }
 
     getData(){
-      
-      
-      this.authenticationService.getUser().subscribe(user => {
-        user;
-        this.inscripcionService.getByIdUser(user._id).subscribe(data=>{
+        this.inscripcionService.getByIdUser(this.user._id).subscribe(data=>{
           this.inscripciones = data;
         })
-      })
     }
 }

@@ -16,7 +16,8 @@ import { DynamicFormModule } from './dynamic-form.module';
                  HttpClientModule,
                  MaterialModule,
                  MDBBootstrapModule.forRoot() ],
- declarations: [  AlertComponent ],
+ declarations: [  AlertComponent,
+                  LoginFormComponent ],
  providers:    [ 
                 {
                 provide : HTTP_INTERCEPTORS,
@@ -33,7 +34,8 @@ import { DynamicFormModule } from './dynamic-form.module';
                  AlertComponent,
                  CommonModule, 
                  FormsModule,
-                 MaterialModule
+                 MaterialModule,
+                 LoginFormComponent
                   ]
 })
 export class SharedModule { }

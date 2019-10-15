@@ -5,6 +5,10 @@ import { User } from '../_models/user';
 import { store } from './current-user';
 import { SecurityService } from './services/security.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { GLOBAL as config } from '../_config/config';
+import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 /**
  * This service manage the Authentication
@@ -14,8 +18,10 @@ export class AuthenticationService {
     constructor(
         private securityService: SecurityService,
         private router: Router,
+        private http: HttpClient
     ) { }
 
+    contextUrl: string = config.url+'user';
     /**
      * Get the logged user
      */
@@ -23,7 +29,7 @@ export class AuthenticationService {
         return new Observable<User>((ob: any) => {
 
             // Get JWT token from browser storage
-            const token = sessionStorage.getItem('token') || localStorage.getItem('token');
+            let token = sessionStorage.getItem('token') || localStorage.getItem('token');
 
             // Get user from store
             store.currentUser$.subscribe(user => {
@@ -38,6 +44,7 @@ export class AuthenticationService {
                             if (!usr || (!usr._id && !usr.success)) {
                                 ob.next(undefined);
                             } else {
+                                store.setUser(usr);
                                 ob.next(usr);
                             }
                         }
@@ -58,7 +65,6 @@ export class AuthenticationService {
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
         store.setUser(null);
-        this.router.navigate(['dashboard/login']);
     }
 
 }

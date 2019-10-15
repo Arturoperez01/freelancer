@@ -19,6 +19,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.router.navigate(['dashboard/login']);
   }
 /*
   setClicked(val: boolean): void {

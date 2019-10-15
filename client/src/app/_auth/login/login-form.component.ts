@@ -1,5 +1,9 @@
 import { Input, Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms';
+import SHA3 from 'sha3';
+import { store } from '../../../app/_auth/current-user';
+import { User } from '../../_models/user/user';
+import { SecurityService } from '../../_auth/services/security.service';
 
 @Component({
   selector: 'my-login-form',
@@ -33,19 +37,42 @@ import { FormGroup, FormControl} from '@angular/forms';
 export class LoginFormComponent {
   @Input() error: string | null;
 
-  @Output() submitEM = new EventEmitter<FormGroup>();
+  @Output() submitEM = new EventEmitter<any>();
 
+  user: User = new User(null, null, null, null,null,null);
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
     remember: new FormControl(''),
   });//*/
-  constructor() {
+  constructor( private securityService: SecurityService) {
   }
   submit() {
     if (this.form.valid) {
-      //console.log(this.form.value)
-      this.submitEM.emit(this.form.value);
+        const hash = new SHA3(512);
+        hash.update(this.form.value.password);
+
+        const sha3pass = hash.digest('hex');
+        this.securityService.login(this.form.value.username, sha3pass, this.form.value.remember)
+        .subscribe(
+            data => {
+                this.setUser(data);   
+                this.submitEM.emit(data);
+                  
+                //this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.submitEM.emit(error);
+                //console.log(error);
+                //this.setMessage(error);
+                //this.alertService.error(error);
+                //this.loading = false;
+            });
+      //store.setUser(user);
     }
+  }
+  
+  private setUser(user: User) {
+      store.setUser(user);
   }
 }

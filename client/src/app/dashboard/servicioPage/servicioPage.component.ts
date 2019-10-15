@@ -71,6 +71,7 @@ export class ServicioPageComponent implements AfterViewInit {
             this.alertService.error(error);
         });
   }
+  
   deleteServicio(id) {
     this.servicioService.delete(id)
     .subscribe(

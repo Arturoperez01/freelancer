@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { store } from '../../app/_auth/current-user';
 import { SecurityService } from '../_auth/services/security.service';
-import SHA3 from 'sha3';
+import { AuthenticationService } from '../_auth/authentication.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../_services/alert.service'
+
 /*
 declare var $: any
 declare var require: any;
@@ -24,16 +27,20 @@ export class HomeComponent implements OnInit {
   message: string;
   public login;
   
-  constructor(private authService: SecurityService,
-              private router: Router
+  constructor(private securityService: SecurityService,
+              private authService: AuthenticationService,
+              private router: Router,
+              private alertService: AlertService
               ) {
     //this.setMessage();
     //$(".loader").fadeOut("slow");
   }
   
   ngOnInit(){
-    
-    this.login = sessionStorage.getItem('token') || localStorage.getItem('token');
+    this.login = this.authService.getUser().subscribe(user => this.login = user, err => this.login = null);
+    store.currentUser$.subscribe(user =>this.login = user);
+    //store.currentUser$.subscribe(user =>{ console.log(user); });
+    //sessionStorage.getItem('token') || localStorage.getItem('token');
     //console.log(this.login);
     /*
     if(this.login){
@@ -43,43 +50,36 @@ export class HomeComponent implements OnInit {
     //*/
   }
 
-  setMessage(message) {
-    this.message = message;
-    //this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-  }
 
   onLogin(data) {
-    //console.log("dahsboard login",data);
-    
-    const hash = new SHA3(512);
-    hash.update(data.password);
-    const sha3pass = hash.digest('hex');
-    this.authService.login(data.username, sha3pass, data.remember)
-    .subscribe(
-        data => {
-            console.log(data);        
-            location.reload();  
-            //this.router.navigate([this.returnUrl]);
-        },
-        error => {
-            console.log(error);
-            this.setMessage(error);
-            //this.alertService.error(error);
-            //this.loading = false;
-        });
-    //*/
-    this.setMessage("something");
+      
+    if(!data.status){    
+      //this.setUser(data);   
+      //location.reload();  
+      this.router.navigate(['/']);
+    }else{
+      this.alertService.error(data.statusText)
+    };
   }
 
   onSignup(data) {
-    //console.log("dahsboard login",data);
+    //console.log("dahsboard signup",data);
+    
+    if(!data.status){    
+      //console.log(data)
+      //this.setUser(data);   
+      //location.reload();  
+      this.router.navigate(['/']);
+    }else{
+      this.alertService.error(data.statusText)
+    };
     /*
     this.authService.createUser(data)
     .subscribe(
         data => {
             console.log(data);
             //this.router.navigate([this.returnUrl]);
-          /*
+          
             if(data.auth.success == 'OK'){
               localStorage.setItem('info',JSON.stringify(data.auth.data));
               localStorage.setItem('token',data.auth.token);            
@@ -97,12 +97,11 @@ export class HomeComponent implements OnInit {
             //this.loading = false;
         });
     //*/
-    this.setMessage("something");
   }
   
   logOff(){
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    this.authService.logout();      
+    location.reload();  
     this.router.navigateByUrl('/home')
   }
 }

@@ -17,12 +17,12 @@
         </ul>
         
           <ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item avatar dropdown" *ngIf="!login">
+            <li class="nav-item avatar dropdown" *ngIf="login==null">
               <a mdbWavesEffect type="button" (click)="basicModal.show()" class="nav-link waves-light" mdbWavesEffect>
                   Login/Sign-up<mdb-icon fas icon="sign-in-alt"></mdb-icon>
               </a>
             </li>
-            <li class="nav-item avatar dropdown" *ngIf="login">
+            <li class="nav-item avatar dropdown" *ngIf="login!=null">
               <a mdbWavesEffect type="button" (click)="logOff()" class="nav-link waves-light" mdbWavesEffect>
                   Log-out<mdb-icon fas icon="sign-out-alt"></mdb-icon>
               </a>
@@ -99,12 +99,15 @@
         </ul>
 
         <!-- Tab panels -->
+        
+        <alert class="text-center"></alert>
         <div class="tab-content pt-3">
           <!--Panel 1-->
           <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
 
             <!--Body-->
             <div class="modal-body mb-1">
+              
               <my-login-form [error]="message" (submitEM)="onLogin($event)"></my-login-form>
             </div>
             <!--Footer-->

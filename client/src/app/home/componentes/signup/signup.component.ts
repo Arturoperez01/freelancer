@@ -1,37 +1,43 @@
 import { Input, Component, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl} from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
+import { SecurityService } from '../../../_auth/services/security.service';
+import SHA3 from 'sha3';
+import { store } from '../../../_auth/current-user';
+import { User } from '../../../_models/user';
 
 @Component({
   selector: 'my-sign-up-form',
   template: `
   <form  [formGroup]="form" (ngSubmit)="submit()">
+    
+    <p class="h4 mb-4">Registro</p>
   
     <div class="md-form form-sm">
     <i class="fas fa-user prefix"></i>
-    <input type="text" id="form13" formControlName="username" class="form-control form-control-sm" mdbInput>
-    <label for="form13">Your name</label>
+    <input type="text" formControlName="username" class="form-control form-control-sm" mdbInput>
+    <label>Su nombre de usuario</label>
     </div>
 
     <div class="md-form form-sm">
     <i class="fas fa-envelope prefix"></i>
-    <input type="text" id="form12" formControlName="email" class="form-control form-control-sm" mdbInput>
-    <label for="form12">Your email</label>
+    <input type="text" formControlName="email" class="form-control form-control-sm" mdbInput>
+    <label>Su correo</label>
     </div>
 
     <div class="md-form form-sm">
     <i class="fas fa-lock prefix"></i>
-    <input type="password" id="form14" formControlName="password"  class="form-control form-control-sm" mdbInput>
-    <label for="form14">Your password</label>
+    <input type="password" formControlName="password"  class="form-control form-control-sm" mdbInput>
+    <label>Su contraseña</label>
     </div>
 
     <div class="md-form form-sm">
     <i class="fas fa-lock prefix"></i>
-    <input type="password" id="form15" class="form-control form-control-sm" mdbInput>
-    <label for="form15">Repeat password</label>
+    <input type="password" formControlName="repeatPassword" class="form-control form-control-sm" mdbInput>
+    <label>Repita la contraseña</label>
     </div>
 
     <div class="text-center form-sm mt-2">
-    <button class="btn btn-primary">Sign up <i class="fas fa-sign-in ml-1"></i></button>
+    <button class="btn btn-primary">Registrarse <i class="fas fa-sign-in ml-1"></i></button>
     </div>
   </form>
   `,
@@ -47,21 +53,55 @@ type User = {
 export class SignupFormComponent {
     @Input() error: string | null;
   
-    @Output() submitEM = new EventEmitter<FormGroup>();
+    @Output() submitEM = new EventEmitter<any>();
   
     form: FormGroup = new FormGroup({
-      username: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
+      username: new FormControl('',[formValidator.required]),
+      email: new FormControl('',[formValidator.required]),
+      password: new FormControl('',[formValidator.required]),
+      repeatPassword: new FormControl('',[formValidator.required,formValidator.equalVal]),
     });//*/
-    constructor() {
+    constructor(
+      private securityService: SecurityService
+    ) {
     }
     submit() {
+        
       if (this.form.valid) {
+        const hash = new SHA3(512);
+        hash.update(this.form.value.password);
+
+        const sha3pass = hash.digest('hex');
+        this.form.controls['password'].setValue( sha3pass)
+        
+        this.securityService.register(this.form.value).subscribe(data=>{
+          this.setUser(data);
+          this.submitEM.emit(data);
+        },error=>{
+          this.submitEM.emit(error);
+        });
+        //*/
         //console.log(this.form.value)
-        this.submitEM.emit(this.form.value);
       }
     }
+    
+    private setUser(user: User) {
+      store.setUser(user);
+    }
+  }
+
+  export class formValidator extends Validators {
+    static equalVal() {
+      return (c: AbstractControl) => {
+          
+        const password = c.value.password;
+        const passwordRepeated = c.value.passwordRepeated;
+
+        if (!password || !passwordRepeated) return null;
+        return password==passwordRepeated ? null : { notEqual: true };
+      }
+    }
+
   }
   /*
 export default class SignupController {

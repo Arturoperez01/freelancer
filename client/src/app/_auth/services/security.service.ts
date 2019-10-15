@@ -35,6 +35,21 @@ export class SecurityService {
     }
 
     /**
+     * Sign up 
+     */
+    register(user: User): Observable<User> {
+        return this.http.post<User>(`${this.contextUrl}/user/signup`, user)
+        .pipe(
+            tap(user => this.setSession(user.token)),
+            map(user => user),
+            shareReplay()
+        );
+        /*
+        .pipe(map(data  => { data })
+        );
+        //*/
+    }
+    /**
      * Verify JWT token
      *
      * @param {string} token JWT token to verify

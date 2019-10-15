@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/_auth';
 //import { RolesConfig } from '../../_models/roles/roles-config'
 
 @Component({
-  selector: 'app-misinscripcion',
+  selector: 'app-misinscripciones',
   templateUrl: 'misinscripcionespage.component.html'
   //,styleUrls: ['./eventos.component.scss']
 })
@@ -31,14 +31,14 @@ export class MisInscripcionesPageComponent {
                   private route: ActivatedRoute,
                   //private user: store
                 ) {
-            
+      store.currentUser$.subscribe(user =>this.user = user);       
+      console.log(this.user);     
       this.getData();
       
     }
 
     getData(){
-      console.log(this.user);
-      /*
+      
       this.inscripcionService.getByIdUser(this.user._id)
       .subscribe(
         datainscripcion=>{
