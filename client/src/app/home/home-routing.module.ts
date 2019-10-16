@@ -28,6 +28,11 @@ const routes: Routes = [
         path: 'misinscripciones/:id',
         loadChildren: './misInscripcionesPage/misinscripcionespage.module#MisInscripcionesPageModule', data: {preload: true}      
       },
+      {
+        path: 'perfil',
+        loadChildren: './perfil/perfil.module#PerfilModule', data: {preload: true}
+        //loadChildren: '../fbaudio/baudio.module#BaudioModule', data: {preload: true}      
+      }
       //*/  
   ]
   }

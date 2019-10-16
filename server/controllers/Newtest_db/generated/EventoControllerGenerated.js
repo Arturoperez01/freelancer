@@ -13,6 +13,7 @@ const generatedControllers = {
   init: router => {
     const baseUrl = `${Properties.api}/eventos`;
     router.post(baseUrl + "", authorize([]), EventoController.create);
+    router.post(baseUrl + "/me", authorize([]), EventoController.userEvent);
     router.delete(baseUrl + "/:id", authorize([]), EventoController.delete);
     router.get(baseUrl + "/:id", authorize([]), EventoController.get);
     router.get(baseUrl + "/findByid_turno/:id", EventoController.findByidTurno);
@@ -114,7 +115,23 @@ const generatedControllers = {
     }
   },
   
-  
+  /**
+  * eventoModel.userEvent
+  *   @description CRUD ACTION download
+  *   @returns String
+  *
+  */
+ userEvent: async (req, res) => {
+  try {
+    console.log(req.body);
+    const result = await EventoModel.userEvent(req.body);
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    const safeErr = ErrorManager.getSafeError(err);
+    res.status(safeErr.status).json(safeErr);
+  }
+},
   /**
   * EventoModel.update
   *   @description CRUD ACTION update

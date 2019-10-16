@@ -148,7 +148,7 @@ const generatedControllers = {
   *
   */
   list: async (req, res) => {
-    try {
+  try {
       const result = await InscripcionModel.list();
       res.json(result);
     } catch (err) {
@@ -156,8 +156,7 @@ const generatedControllers = {
       res.status(safeErr.status).json(safeErr);
     }
   },
-  
-  
+    
   /**
   * InscripcionModel.update
   *   @description CRUD ACTION update

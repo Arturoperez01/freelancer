@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
   title = 'Index';
   login;
   constructor(
-              private authService: AuthenticationService
+              private authService: AuthenticationService,
             ){}
  ngOnInit() {
    this.authService.getUser().subscribe(user => this.login = user, err => this.login = null);

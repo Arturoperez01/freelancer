@@ -30,6 +30,12 @@ export class EventoService {
         .pipe(map(data => data));
     }
 
+    getUserEvent(id: string): Observable<Eventos> {
+        return this.http
+        .post<Eventos>(`${this.contextUrl}/me`, {id: id})
+        .pipe(map(data => data));
+    }
+
     getById(id: string): Observable<Eventos> {
         return this.http
         .get<Eventos>(`${this.contextUrl}/` + id)

@@ -2,7 +2,7 @@
 import Database from "../../../classes/Database_Newtest_db";
 import mongoose, { Schema } from "mongoose";
 import TurnosModel from "../TurnosModel";
-
+import UserModel from "../UserModel";
 // Logger
 import Logger from "../../../classes/Logger";
 import { stringify } from "querystring";
@@ -156,6 +156,42 @@ const generatedModel = {
     return await generatedModel.model.find();
   },
   
+  /**
+  * nominaModel.get
+  *   @description CRUD ACTION get
+  *   @param filter object
+  *
+  */
+ 
+  async userEvent(userId) {
+    let query={};
+    const user = await UserModel.get(userId.id);
+    console.log(user);
+    if(user.perfiles.length != 0?true:false){
+      query.perfiles.$in = user.perfiles;
+    }
+    if(user.servicios.length != 0?true:false){
+       query.servicio.$in = user.servicios;
+    }
+    console.log(query);
+    /*
+    if(filter.datereg_fin&&filter.datereg_ini){
+        query.datereg = { $lte : new Date(filter.datereg_fin) , $gte : new Date(filter.datereg_ini)};
+    }
+  
+    if(filter.name){
+      query.name = new RegExp(`^${filter.name}`);
+    }
+
+    Team.find({
+        '_id': { $in: teamIds }
+    }, function(err, teamData) {
+        console.log("teams name  " + teamData);
+    });
+    //*/
+    return await generatedModel.model.find().select(["-_id","-__v"]);
+  },
+
   /**
   * eventoModel.update
   *   @description CRUD ACTION update

@@ -63,7 +63,13 @@ export class MisInscripcionesComponent {
                   private route: ActivatedRoute
                 ) {
       store.currentUser$.subscribe(user =>this.user = user);    
+      console.log(this.user);
+      this.eventoService.getUserEvent(this.user._id)
+      .subscribe(data=>{
+        console.log(data);
+      });
       this.getData();
+
     }
 
     getData(){
