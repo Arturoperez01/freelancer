@@ -25,12 +25,18 @@ export class InscripcionService {
         .pipe(map(data => data));
     }
 
+    getByIdEvento(id: string): Observable<Inscripcion[]> {
+        return this.http
+        .get<Inscripcion[]>(`${this.contextUrl}/findByid_evento/` + id)
+        .pipe(map(data => data));
+    }
+
     getByIdUser(id: string): Observable<Inscripcion[]> {
         return this.http
         .get<Inscripcion[]>(`${this.contextUrl}/user/` + id)
         .pipe(map(data => data));
     }
-
+    
     register(inscripcion: Inscripcion): Observable<Inscripcion> {
         return this.http.post<Inscripcion>(`${this.contextUrl}/`, inscripcion)
         .pipe(map(data => data));

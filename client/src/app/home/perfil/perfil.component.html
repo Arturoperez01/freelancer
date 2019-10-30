@@ -11,19 +11,35 @@
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" #username="ngModel" required disabled>
                 </div>
-                    <div class="form-group">
-                        <label for="username">Correo</label>
-                        <input type="string" class="form-control" id="correo" [(ngModel)]="user.email" name="email" #email="ngModel" >
-                    </div>
-                    <div class="form-group">
-                        <label for="username">name</label>
-                        <input type="string" class="form-control" id="name" [(ngModel)]="user.name" name="name" #name="ngModel" >
-                    </div>
+                <div class="form-group">
+                    <label for="username">Correo</label>
+                    <input type="string" class="form-control" id="correo" [(ngModel)]="user.email" name="email" #email="ngModel" >
+                </div>
+                <div class="form-group">
+                    <label for="username">name</label>
+                    <input type="string" class="form-control" id="name" [(ngModel)]="user.name" name="name" #name="ngModel" >
+                </div>
+                <div class="form-group">
+                    <label for="username">Servicios</label>                    
+                    <br>
+                        <mdb-badge *ngFor="let perfil of this.user.servicios; let i = index; trackBy:trackByFn" 
+                                    class="mx-1"
+                                pill="true" primary="true">{{perfil}}
+                        </mdb-badge>
+                </div>
+                <div class="form-group">
+                    <label for="username">Perfiles</label>
+                    <br>
+                        <mdb-badge *ngFor="let perfil of this.user.perfiles; let i = index; trackBy:trackByFn" 
+                                    class="mx-1"
+                                pill="true" primary="true">{{perfil}}
+                        </mdb-badge>
+                </div>
                 <div class="mt-40">
                     <button class="btn btn-info" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
                     <button class="btn btn-primary pull-right" color="primary" [disabled]="profileForm.invalid" (click)="save(profileForm.valid)">Save</button>
                     <button class="btn btn-secondary pull-right mr-2" routerLink="/home">Back To Home</button>
-                </div>
+                </div> 
             </div>
         </div>
     </form>

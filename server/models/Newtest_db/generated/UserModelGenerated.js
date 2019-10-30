@@ -37,12 +37,29 @@ const generatedModel = {
         type: Boolean//, 
         //required : true
       },
+      servicios: [{
+        type: "String"
+      }],
+      perfiles: [{
+        type: "String"
+      }],
+      email: {
+        type: "String"
+      }
+      
       //RELATIONS
       
       //EXTERNAL RELATIONS
       /*
       */
     });
+
+    userSchema.virtual('test').get(function() {
+      console.log("test");
+      return 'name';
+    })
+    
+    
     /*
     userSchema.post('save', (doc)=>{
       doc.activo='true';

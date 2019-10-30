@@ -6,6 +6,7 @@ import mongoose, { Schema } from "mongoose";
 import Logger from "../../../classes/Logger";
 import { stringify } from "querystring";
 import TurnosModel from "../TurnosModel";
+import EventoModel from "../EventoModel";
 
 /*
 const PersonaSchema = { 
@@ -176,15 +177,18 @@ const generatedModel = {
     .populate( 'idTurno','-inscripciones,-cupo')
     .populate('idEvento','titulo');
     },
+
   /**
   * eventoModel.findByEvento
   *   @description CRUD ACTION findByEvento
   *   @param Objectid key Id della risorsa Evento da cercare
   *
   */
- async findByEvento(key) {
+
+ async findByidEvento(key) {
     return await generatedModel.model.find({ 'idEvento' : key});
   },
+
   /**
   * inscripcionModel.list
   *   @description CRUD ACTION list

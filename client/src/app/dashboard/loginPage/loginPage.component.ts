@@ -23,30 +23,33 @@ export class LoginPageComponent {
   constructor(
                 private route: ActivatedRoute,
                 private router: Router,
-                private securityService: SecurityService,
+                //private securityService: SecurityService,
                 private authenticationService: AuthenticationService,
                 private alertService: AlertService
               ) {
     //this.setMessage();
     //$(".loader").fadeOut("slow");
     //this.authService.logout();
-    this.authenticationService.logout();
+    //this.authenticationService.logout();
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard/';
   }
 
 
   onSubmit(data) {    
-    
-    if(!data.status){    
+    //if (this.authenticationService.isLoggedIn){
+    if(data){
       //location.reload();  
-      this.setUser(data);
-      this.router.navigate(['dashboard/']);
+      //console.log(this.authenticationService.isLoggedIn);
+      //this.setUser(data);
+      this.router.navigate(['dashboard/home']);
     }else{
-      this.alertService.error(data.statusText)
+      //this.alertService.error(data.statusText)
+      this.alertService.error("Login o contraseña no coinciden");
     };
   }
-
+    /*
     private setUser(user: User) {
         store.setUser(user);
     }
+    //*/
 }

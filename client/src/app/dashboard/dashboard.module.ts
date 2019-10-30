@@ -54,7 +54,7 @@ import { AuthGuard }                          from '../auth/auth.guard';
     DashboardComponent,
     NavigationComponent,    
     FooterComponent,
-    LoginPageComponent,
+    //LoginPageComponent,
     UserPageComponent,
     UserEditComponent,
     RolesPageComponent,

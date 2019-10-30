@@ -133,6 +133,7 @@ const generatedModel = {
   *
   */
   async get(id) {
+    
     return await generatedModel.model.findOne({_id: id})
     .populate('turnos');
   },
@@ -164,32 +165,21 @@ const generatedModel = {
   */
  
   async userEvent(userId) {
-    let query={};
-    const user = await UserModel.get(userId.id);
-    console.log(user);
+    let query={
+                perfiles: {$in:Array},
+                servicio: {$in:Array}
+              };
+    let user = await UserModel.get(userId.id);
+    
     if(user.perfiles.length != 0?true:false){
       query.perfiles.$in = user.perfiles;
     }
     if(user.servicios.length != 0?true:false){
        query.servicio.$in = user.servicios;
     }
-    console.log(query);
-    /*
-    if(filter.datereg_fin&&filter.datereg_ini){
-        query.datereg = { $lte : new Date(filter.datereg_fin) , $gte : new Date(filter.datereg_ini)};
-    }
-  
-    if(filter.name){
-      query.name = new RegExp(`^${filter.name}`);
-    }
-
-    Team.find({
-        '_id': { $in: teamIds }
-    }, function(err, teamData) {
-        console.log("teams name  " + teamData);
-    });
     //*/
-    return await generatedModel.model.find().select(["-_id","-__v"]);
+
+    return await generatedModel.model.find(query).select(["-__v"]);
   },
 
   /**

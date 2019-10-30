@@ -44,6 +44,7 @@ const securityControllers = {
         var token = jsonwebtoken.sign(user, Properties.tokenSecret, {
           expiresIn: 10800 //3 hours
         });
+        console.log(user.test);
         user.token = token;
         user.password = undefined;
         res.send(user);

@@ -37,6 +37,7 @@ export class InscripcionComponent {
     }
   
     addInscripcion(data){
+      console.log(this.user._id);
       const inscripcion = new Inscripcion(null, this.user._id, data, this.idEvento,0, 0);
       this.inscripcionService.register(inscripcion).subscribe(data=>{this.alertService.success("Inscripcion exitosa")})
       this.getData();
@@ -47,12 +48,13 @@ export class InscripcionComponent {
       this.getData();
     }
     getData(){
-      
+      /*
       this.authenticationService.getUser().subscribe(user => {
         this.user = user;
         //console.log(this.user);
       }, err => this.user = null);
-      //store.currentUser$.subscribe( user => this.user = user);
+      //*/
+      store.currentUser$.subscribe( user => this.user = user);
       //This.inscripcionService.getAll()
         this.route.params.subscribe(params => {
             //console.log(params);

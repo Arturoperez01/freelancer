@@ -11,18 +11,6 @@ const customModel = {
     init() {
       let schema = UserModelGenerated.init();
   
-      schema.add({
-        servicios: [{
-          type: "String"
-        }],
-        perfiles: [{
-          type: "String"
-        }],
-        email: {
-          type: "String"
-        }
-      });
-      schema.pre('save',()=>{console.log("new user added")})
       
     },
      

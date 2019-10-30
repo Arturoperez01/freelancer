@@ -5,6 +5,7 @@ import { OnInit, Injectable } from '@angular/core';
 import { Eventos } from '../../../_models/eventos/eventos';
 import { Turno } from '../../../_models/eventos/turno';
 import { EventoService } from '../../../_services/evento.service';
+import { InscripcionService } from '../../../_services/inscripcion.service'
 //import { AuthenticationService } from 'src/app/security/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 //import { SHA3 } from 'sha3';
@@ -35,6 +36,7 @@ export class  EditEventosComponent implements OnInit {
     today;
     horas: any = [];
     servicios;
+    inscripcion;
     loading;
     getToday(){
         
@@ -64,6 +66,7 @@ export class  EditEventosComponent implements OnInit {
         private eventoService: EventoService,
         private eventoFormService: EventoFormService,
         private location: Location,
+        private inscripcionService: InscripcionService,
         //private user: EventosConfig,
         //private authenticationService: AuthenticationService,
         private router: Router,
@@ -111,6 +114,11 @@ export class  EditEventosComponent implements OnInit {
         this.route.params.subscribe(params => {
             //console.log(params);
             this.id = params.id;
+            this.inscripcionService.getByIdEvento(this.id).subscribe( data =>{
+                this.inscripcion = data;
+                console.log(data);
+                }
+            )
             if (this.id === 'new') {
                 // New User
                 //this.eventos = new Eventos(null, null, null,[],[]);

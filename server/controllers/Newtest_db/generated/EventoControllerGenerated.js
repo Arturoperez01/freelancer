@@ -123,9 +123,7 @@ const generatedControllers = {
   */
  userEvent: async (req, res) => {
   try {
-    console.log(req.body);
     const result = await EventoModel.userEvent(req.body);
-    console.log(result);
     res.json(result);
   } catch (err) {
     const safeErr = ErrorManager.getSafeError(err);

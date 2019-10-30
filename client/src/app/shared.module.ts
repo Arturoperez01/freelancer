@@ -10,6 +10,8 @@ import { AuthGuard, AuthInterceptor, AuthenticationService, SecurityService }  f
 import { AlertComponent } from './_directives'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DynamicFormModule } from './dynamic-form.module';
+import { PageNotFoundComponent } from "./pagenotfound.component";
+
 @NgModule({
  imports:      [ CommonModule,
                  ReactiveFormsModule,
@@ -17,7 +19,9 @@ import { DynamicFormModule } from './dynamic-form.module';
                  MaterialModule,
                  MDBBootstrapModule.forRoot() ],
  declarations: [  AlertComponent,
-                  LoginFormComponent ],
+                  LoginFormComponent,
+                  PageNotFoundComponent
+                 ],
  providers:    [ 
                 {
                 provide : HTTP_INTERCEPTORS,
@@ -25,13 +29,15 @@ import { DynamicFormModule } from './dynamic-form.module';
                 multi   : true,
                 },
                 AlertService,
-                UserService,
+                UserService/*,
                 // SECURITY
+                
                 AuthGuard,
                 AuthenticationService,
-                SecurityService ],
+                SecurityService//*/ ],
  exports:      [ 
                  AlertComponent,
+                 PageNotFoundComponent,
                  CommonModule, 
                  FormsModule,
                  MaterialModule,

@@ -6,6 +6,7 @@ import { SharedModule } from '../../../shared.module';
 import { EditEventosComponent } from './editEventos.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { EventoService } from '../../../_services/evento.service';
+import { InscripcionService } from '../../../_services/inscripcion.service'
 import { EventoFormService } from '../eventoForm.service';
 
 @NgModule({
@@ -20,7 +21,7 @@ import { EventoFormService } from '../eventoForm.service';
   declarations: [
     EditEventosComponent
   ],
-  providers:[EventoService],
+  providers:[EventoService,InscripcionService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EditEventosModule { }

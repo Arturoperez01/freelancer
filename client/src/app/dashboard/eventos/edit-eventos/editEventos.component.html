@@ -79,9 +79,9 @@
                     <div class="form-group"  class="col-12">
                         <mdb-badge *ngFor="let perfil of form.controls['details']['controls']['perfiles'].value; let i = index; trackBy:trackByFn" 
                                     class="mx-1"
-                                pill="true" primary="true">{{perfil}} <span (click)="form.controls['details']['controls']['perfiles'].value.splice(i,1)">
-                        <i class="fa fa-times-circle"></i></span> 
-                    </mdb-badge>
+                                pill="true" primary="true">{{perfil}} <span (click)="form.controls['details']['controls']['perfiles'].value.splice(i,1)" *ngIf="id=='new'">
+                            <i class="fa fa-times-circle"></i></span> 
+                        </mdb-badge>
                     </div>
                     <!--label style="color: red" *ngIf="form.controls['perfiles'].hasError('required') && (form.controls['perfiles'].dirty || form.controls['perfiles'].touched)">Requerido</label-->
                             

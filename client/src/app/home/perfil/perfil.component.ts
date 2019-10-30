@@ -37,11 +37,11 @@ export class PerfilComponent {
     ) { }
 
     ngOnInit(): void {
-        this.route.params.subscribe(params => {
-            // Get logged user
-            this.authenticationService.getUser().subscribe(user => this.user = user);
-        });
-    }
+        this.authenticationService.getUser().subscribe(user => {
+                                                                    this.user = user;
+                                                                    console.log(this.user);
+                                                                });
+                    }
 
     /**
      * Save User

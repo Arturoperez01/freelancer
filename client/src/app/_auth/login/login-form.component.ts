@@ -4,13 +4,14 @@ import SHA3 from 'sha3';
 import { store } from '../../../app/_auth/current-user';
 import { User } from '../../_models/user/user';
 import { SecurityService } from '../../_auth/services/security.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'my-login-form',
   template: `
   <form  [formGroup]="form" (ngSubmit)="submit()">
   
-    <p class="h4 mb-4">Sign in</p>
+    <p class="h4 mb-4">Sign in </p>
   
     <!-- Email -->
     <div class="form-group ">
@@ -45,7 +46,8 @@ export class LoginFormComponent {
     password: new FormControl(''),
     remember: new FormControl(''),
   });//*/
-  constructor( private securityService: SecurityService) {
+  constructor( //private securityService: SecurityService,
+            private authenticationService: AuthenticationService) {
   }
   submit() {
     if (this.form.valid) {
@@ -53,15 +55,17 @@ export class LoginFormComponent {
         hash.update(this.form.value.password);
 
         const sha3pass = hash.digest('hex');
-        this.securityService.login(this.form.value.username, sha3pass, this.form.value.remember)
+        this.authenticationService.login(this.form.value.username, sha3pass, this.form.value.remember)
         .subscribe(
             data => {
                 this.setUser(data);   
+                
+                //this.submitEM.emit(this.authenticationService.isLoggedIn);
                 this.submitEM.emit(data);
-                  
                 //this.router.navigate([this.returnUrl]);
             },
             error => {
+                //this.submitEM.emit(this.authenticationService.isLoggedIn);
                 this.submitEM.emit(error);
                 //console.log(error);
                 //this.setMessage(error);
@@ -75,4 +79,5 @@ export class LoginFormComponent {
   private setUser(user: User) {
       store.setUser(user);
   }
+  //*/
 }

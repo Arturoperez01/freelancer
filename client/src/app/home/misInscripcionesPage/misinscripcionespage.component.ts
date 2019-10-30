@@ -32,7 +32,7 @@ export class MisInscripcionesPageComponent {
                   //private user: store
                 ) {
       store.currentUser$.subscribe(user =>this.user = user);       
-      console.log(this.user);     
+      
       this.getData();
       
     }

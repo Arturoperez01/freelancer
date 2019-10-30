@@ -1,6 +1,7 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
+import { store } from '../../../_auth/current-user';
 import { ViewChild } from '@angular/core';
 import { AlertService } from 'src/app/_services';
 //import { RolesConfig } from '../../_models/roles/roles-config'
@@ -42,19 +43,33 @@ import { EventoService } from 'src/app/_services/evento.service';
 
 export class MisEventosComponent {
     
-  eventos=[];
-  
+  eventos: any =[];
+  user;
   constructor(  
                 private eventoService: EventoService,
                 private alertService: AlertService
               ) {
           
-    this.getEventos();
+      store.currentUser$.subscribe(user =>this.user = user);    
+      console.log(this.user);
+      
+      this.getEventos();
+      //this.getData();
   }
 
 
   getEventos(){
-    
+    this.eventoService.getUserEvent(this.user._id)
+      .subscribe(data=>{
+          // console.log(data);
+          this.eventos = data;
+        },
+        error => {
+         // console.log(error);
+            this.alertService.error(error);
+        }
+      );
+    /*
     this.eventoService.getAll()
     .subscribe(
         data => {
