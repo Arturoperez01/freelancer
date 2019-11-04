@@ -133,7 +133,24 @@ const generatedModel = {
   *
   */
   async get(id) {
-    
+      generatedModel.model.aggregate([ 
+                                        {$match:{_id:  mongoose.Types.ObjectId(id)}},
+                                        {$lookup:{
+                                                  "from": "turnos",
+                                                  "localField": "turnos",
+                                                  "foreignField": "_id",
+                                                  "as": "Turnos"
+                                                  }
+                                        },
+                                        {"$unwind": "$Turnos" }
+                                        //*/
+                                      ], function (err, result) {
+                                        if (err) {
+                                            next(err);
+                                        } else {
+                                            console.log(result);
+                                        }
+                                    });
     return await generatedModel.model.findOne({_id: id})
     .populate('turnos');
   },

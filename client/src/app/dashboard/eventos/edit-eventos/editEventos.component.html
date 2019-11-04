@@ -60,6 +60,8 @@
                     <div class="form-group col-12"> 
                         <h3>Perfiles</h3>
                     </div>
+                </div>
+                <div class="row" *ngIf='id=="new"'> 
                     <div class="form-group col-11">
                         <input type="text" class="form-control" name="newPerfil" #newPerfil>
                     </div>
@@ -74,7 +76,7 @@
                     No hay perfiles asignado al evento
                 </label>
                 <!-- NO ROLES -->
-                <div class="row my-3">
+                <div class="row my-3" >
                     
                     <div class="form-group"  class="col-12">
                         <mdb-badge *ngFor="let perfil of form.controls['details']['controls']['perfiles'].value; let i = index; trackBy:trackByFn" 
@@ -143,7 +145,7 @@
                     No hay turnos asignado al evento 
             </h5>
             <!-- NO ROLES -->
-            <div  *ngIf="form.controls['turnos'].controls.length > 0"class="row mt-2">
+            <div  *ngIf="form.controls['turnos'].controls.length > 0" class="row mt-2">
             
                 <div class="col-sm-12">
                     <div class="container">

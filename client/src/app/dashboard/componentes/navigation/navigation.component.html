@@ -46,6 +46,19 @@
                     </button>
             </div>
 
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item avatar dropdown" mdbDropdown *ngIf="login!=null">
+                      <a mdbDropdownToggle type="button"  color="primary" class="dropdown-toggle nav-link waves-light"
+                      mdbWavesEffect>
+                          Welcome {{login.username}}
+                      </a>
+                      <div class="dropdown-menu dropdown-primary">
+                          <!--a class="dropdown-item" routerLink="perfil">Perfil</a>
+                          <div class="dropdown-divider"></div-->
+                          <a class="dropdown-item" (click)="logOff()">Logout</a>
+                      </div>
+                    </li>
+                  </ul>
     </div>
     <!--/.Navbar-->
 

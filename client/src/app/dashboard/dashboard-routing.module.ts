@@ -21,6 +21,7 @@ const routes: Routes = [
   children:
   [
       { path: 'home', component: HomePageComponent },
+      //{ path: 'perfil', loadChildren: '../home/perfil/perfil.module#PerfilModule' },
       { path: 'user', component: UserPageComponent },
       { path: 'roles', component: RolesPageComponent },
       { path: 'servicios', component: ServicioPageComponent },
